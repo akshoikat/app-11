@@ -19,7 +19,7 @@ class StudentController extends Controller
         if($students -> count() > 0){
             return StudentResource::collection($students);
         }else{
-            return response()->json(['massage' => 'no reacord available'], 200);
+            return response()->json(['message' => 'No record available'], 200);
         }
     }
 
@@ -39,7 +39,7 @@ class StudentController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'massage' => 'all ',
+                'massage' => 'all files are mendatory ',
                 'error' => $validator ->messages(),
             ], 422);
         }
@@ -64,19 +64,19 @@ class StudentController extends Controller
 
 
 
-    public function show(Student $student){
+    public function show(Student $id){
 
         //show data by id
-        return new StudentResource($student);
+        return new StudentResource($id);
 
     }
 
-    public function update(Request $request, Student $student){
+    public function update(Request $request, Student $id){
 
         // Validate incoming request data
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:students,email,' . $student->id,
+            'email' => 'required|email|unique:students,email,',
             'phone' => 'nullable|string',
             'dob' => 'nullable|date',
             'address' => 'nullable|string',
@@ -91,7 +91,7 @@ class StudentController extends Controller
         }
 
         // Update data
-        $student->update([
+        $id->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -102,7 +102,7 @@ class StudentController extends Controller
         // Return updated data
         return response()->json([
             'message' => 'Student updated successfully',
-            'data' => new StudentResource($student),
+            'data' => new StudentResource($id),
         ], 200);
     }
 

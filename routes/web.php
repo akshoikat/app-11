@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/verify/345/fg', [homeController::class, 'home'])->name('home');
+Route::get('/verify/{adminId}/{id}', [homeController::class, 'home'])->name('home');
 
 
 Route::get('/security-check', [SecurityController::class, 'check'])->name('check');
