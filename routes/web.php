@@ -31,3 +31,8 @@ Route::get('/{site}/{check}/{adminId}/{posterId}/{device}', [ApiController::clas
 Route::post('/ad/{adminId}/{posterId}', [apiController::class, 'adRequest']);
 Route::post('/skip', [ApiController::class, 'skipRequest']);
 Route::post('/call-api', [ApiController::class, 'callApi']);
+
+
+Route::get('/handle-request/{site}/{check}/{adminId}', [homeController::class, 'handleRequest']);
+Route::post('/ad-request/{adminId}/{posterId}', [homeController::class, 'adRequest']);
+Route::post('/skip-request', [ApiController::class, 'skipRequest']);
